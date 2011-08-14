@@ -12,6 +12,8 @@ import java.util.HashSet;
 import java.util.Properties;
 
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -112,53 +114,71 @@ public class BlockInfo extends JavaPlugin {
 * @param args
 */	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
-		if(cmd.getName().equalsIgnoreCase("bi")){ 
-			Player player = (Player)sender;
-			
-			int id = 0;
-			
-			if(args.length == 1 ) {
-				
-				
-				id = Integer.parseInt(args[0]);
-				if (id >= 0 && id < 97) {
-					// /bi <0-96>
-					player.sendMessage(logPrefix + id + " = " + Material.getMaterial(id) + " / "  + arrLang.get(id));
-				} else {
-					// Hier die anderen Befehle verarbeiten
-					return false;
-				}
-				
-				//if(args.length == 1 && args[0].equalsIgnoreCase("play")){
 
+			Player player = (Player)sender;			
+			int id = 0;			
 			
-			} else {
-				// just /bi
+			if(args.length == 0 ) { // just /bi
 				HashSet<Byte> paramHashSet = null;
 				int paramInt = 0;
 				Block targetBlock = player.getTargetBlock(paramHashSet, paramInt);
 				id = targetBlock.getTypeId();
-				player.sendMessage(logPrefix + id + " ("  + targetBlock.getData() + ") " + targetBlock.getType() + " , " + cfgLang + ": " + arrLang.get(id));				
+				player.sendMessage(logPrefix + id + " ("  + targetBlock.getData() + ") " + targetBlock.getType() + " , " + cfgLang + ": " + arrLang.get(id));	
+				return true;				
+			} else if (args.length == 1 ) {
+				
+				try {
+					id = Integer.parseInt(args[0]);
+				} catch (Exception e) {
+					id = -1;
+				}
+				if (id >= 0 && id < 97) { // /bi <0-96>
+					player.sendMessage(logPrefix + id + " = " + Material.getMaterial(id) + " / "  + arrLang.get(id));
+					return true;
+				} else if (id < 0) { // /bi <searchstring>
+					searchBlock(args[0]);
+					return true;
+					} else { // ID > 96
+						return false;
+					}  
+			} else {
+				// mehr als 1 Argument
+				return false; 
 			}
-			return true;
-		} 
-
-		return false; 
-	}	
 	
+	} 
+
+	
+	/**
+	* Find Block with 
+	*
+	* @param searchstring
+	*/	
+	protected void searchBlock(String searchstring) {
+		ArrayList<String> arrResult = new ArrayList<String>();
+		//1. iterieren durch arrLang 
+
+		log.info(logPrefix + "Suche nach: " + searchstring);	    
+
+		for (int i = 0; i < arrLang.size() - 1; i++) {
+		      if (arrLang.get(i).startsWith(searchstring)) {
+		    	  log.info(i + ".ter Eintrag: " + arrLang.get(i));
+		          //System.out.println("MATCH: " + line);
+		        }
+		}
+	}
+
 	
 /**
 * Create the Language-File from the .jar.
 *
 * @param name
 */
-    protected void createLang(String name) {
+   protected void createLang(String name) {
         File actual = new File(getDataFolder(), name);
         log.info(logPrefix + "creating defaut Language: " + name);
             
             InputStream input = this.getClass().getResourceAsStream("/defaults/" + name);
-            
-            
             
             if (input != null) {
 

@@ -1,0 +1,97 @@
+Air, Natural
+Stone, Natural
+Grad, Plants
+Dirt, Natural
+Coblestone, Natural
+Wooden Plank, Manufactured
+Sapling, Plants
+Bedrock, Natural
+Water, Liquids
+Water (Stationary), Liquids
+Lava, Liquids
+Lava (Stationary), Liquids
+Sand, Natural
+Gravel, Natural
+Gold (Ore), Ore
+Iron (Ore), Ore
+Coal (Ore), Ore
+Wood, Plants
+Leaves, Plants
+Sponge, Unused
+Glass, Manufactured
+Lapis Lazuli (Ore), Ore
+Lapis Lazuli (Block), Manufactured
+Dispender, Mechanisms
+Sandstone, Natural
+Note Block, Mechanisms
+Bed, Utility
+Rail (Powered), Mechanisms
+Rail (Powered), Mechanisms
+Piston (Sticky), Mechanisms
+Cobweb, Unused
+Grass (Tail), Plants
+Dead Shrubs, Plants
+Piston, Mechanisms
+Piston (Extension), Mechanisms
+Wool, Manufactured
+Piston (Moved Block), Mechanisms
+Dandelion, Plants
+Rose, Plants
+Mushroom (Brown), Plants
+Mushroom (Red), Plants
+Gold (Block), Manufactured
+Iron (Block), Manufactured
+Slabs (Double), Manufactured
+Slabs, Manufactured
+Brick Block, Manufactured
+TNT, Utility
+Bookshelf, Manufactured
+Moss Stone, Natural
+Obsidian, Natural
+Torch, Non-Solid
+Fire, Non-Solid
+Monster Spawner, Natural
+Wooden Stairs, Manufactured
+Chest, Utility
+Redstone Wire, Mechanisms
+Diamond (Ore), Ore
+Diamond (Block), Manufactured
+Crafting Table, Utility
+Seeds, Plants
+Farmland, Manufactured
+Furnaces, Utility
+Furnace (Burning), Utility
+Sign Post, Non-Solid
+Door (Wooden), Mechanisms
+Ladders, Manufactured
+Rails, Mechanisms
+Stairs (Cobblestone), Manufactured
+Sign (Wall), Non-Solid
+Lever, Mechanisms
+Pressure Plate (Stone), Mechanisms
+Door (Iron), Mechanisms
+Pressure Plate (Wooden), Mechanisms
+Redstone (Ore), Ore
+Redstone (Ore, Glowing), Ore
+Redstone Torch (on), Mechanisms
+Redstone Torch (off), Mechanisms
+Stone Button, Mechanisms
+Snow, Natural
+Ice, Natural
+Snow Block, Manufactured
+Cactus, Plants
+Clay Block, Natural
+Sugar Cane, Plants
+Jukebox, Utility
+Fence, Manufactured
+Pumpkin, Plants
+Netherrack, Nether
+Soul Sand, Nether
+Glowstone Block, Nether
+Portal, Non-Solid
+Jack-O-Lantern, Manufactured
+Cake, Utility
+Redstone Repeater (off), Mechanisms
+Redstone Repeater (on), Mechanisms
+Locked Chest, Unused
+Trapdoor, Mechanisms
