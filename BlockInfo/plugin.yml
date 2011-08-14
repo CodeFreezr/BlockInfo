@@ -1,9 +1,9 @@
 name: BlockInfo
 main: org.dbt.mc.BlockInfo.BlockInfo
-version: 0.3
+version: 0.4
 author: CraftOz
 description: Simple multingual blockinfo for Minecraft on Bukkit
 commands:
   bi:
     description: Blockinfo for Minecraft!
-    usage: /bi getting infos of selected block or /bi <0-96> getting infos from an id.
+    usage: |/bi getting infos of selected block or |/bi <0-96> getting infos from an id or |/bi <Blocksearch> Finds Blocks starting with Blocksearch.

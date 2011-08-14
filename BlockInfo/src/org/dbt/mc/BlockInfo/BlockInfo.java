@@ -28,7 +28,7 @@ import org.bukkit.util.config.Configuration;
 
 public class BlockInfo extends JavaPlugin {
 
-	public String biversion = "0.3";
+	public String biversion = "0.4";
 	
 	private final BlockInfoPlayerListener playerListener = new BlockInfoPlayerListener(this);
 	static String mainDirectory = "plugins/BlockInfo";
