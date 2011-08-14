@@ -5,5 +5,13 @@ author: CraftOz
 description: Simple multingual blockinfo for Minecraft on Bukkit
 commands:
   bi:
-    description: Blockinfo for Minecraft!
-    usage: |/bi getting infos of selected block or |/bi <0-96> getting infos from an id or |/bi <Blocksearch> Finds Blocks starting with Blocksearch.
+    description: Display Information of BLocks in a selected Language.
+    usage: /bi => getting infos of selected block or - /bi <0-96> => getting infos from an id or - /bi <string> => Finds Blocks starting with string.
+
+  bilang:
+    description: Change the Language.
+    usage: /bilang [de,en,fr,es,nl] Select a Language. de=german, en=english, fr=french, es=spain, nl=netherland
+
+  bilist:
+   description: List all available Languages.
+   usage: /bilist => List all available Languages.

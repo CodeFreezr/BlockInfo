@@ -12,9 +12,8 @@ import java.util.HashSet;
 import java.util.Properties;
 
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -39,13 +38,14 @@ public class BlockInfo extends JavaPlugin {
 	static File nlProbe = new File(mainDirectory + File.separator + "nl.lst");
 	static File esProbe = new File(mainDirectory + File.separator + "es.lst");
 	static File frProbe = new File(mainDirectory + File.separator + "fr.lst");	
+	static File enProbe = new File(mainDirectory + File.separator + "en.lst");
 	
 	
 	private File fileLang; 
 	static Properties prop = new Properties();
 	
 	private ArrayList<String> arrLang = new ArrayList<String>();
-	private String line = "";
+	
 	
 	//The config
 	public Configuration config;
@@ -53,53 +53,45 @@ public class BlockInfo extends JavaPlugin {
 	//Add variables that the user can define. We'll add one each of common types:
 	public String cfgLang;
 
-	//Logger Setting
+	//Logger & Output-Settings
 	Logger log = Logger.getLogger("Minecraft");
 	public static String logPrefix = "[BI] ";
-	
-	
-	//ZipExploder-Util
-	//public ZipExploder ze;
-	 
+	public static String chatPrefix = ChatColor.BLUE + logPrefix;
+	public static String oops = "Oops, here went something wrong. Please reload. If this doesn't work, please post a hint in the Bukkit-Plugin-Forum. thx-a-lot";
 	
 	public void onEnable() {
 		
 		
 		new File(mainDirectory).mkdir();
 		
-		if(!deProbe.exists()) createLang("de.lst");
-		if(!esProbe.exists()) createLang("es.lst");
-		if(!frProbe.exists()) createLang("fr.lst");
-		if(!nlProbe.exists()) createLang("nl.lst");
-		
+		if(!deProbe.exists()) createDefaultLangFile("de.lst");
+		if(!esProbe.exists()) createDefaultLangFile("es.lst");
+		if(!frProbe.exists()) createDefaultLangFile("fr.lst");
+		if(!nlProbe.exists()) createDefaultLangFile("nl.lst");
+		if(!enProbe.exists()) createDefaultLangFile("en.lst");
 		
 		
 	    config = getConfiguration(); 
 	    cfgLang = config.getString("Lang", "de"); 
 	    config.save();
 	
-		log.info(logPrefix + "Language set to: " + cfgLang);
-		log.info(logPrefix + "BlockInfo " + biversion + " enabled.");		
 		
-		fileLang = new File(mainDirectory + File.separator + cfgLang + ".lst");
+		
 		
 		PluginManager pm = this.getServer().getPluginManager();
 		pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Event.Priority.Normal, this);
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(fileLang));
-			while (line != null) {
-				line = reader.readLine();
-				arrLang.add(line);						
-			}
-		} catch (IOException e ) {
-			log.info(logPrefix + "IO-Error");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		arrLang = loadLang(cfgLang, null);
+		
+		
+		log.info(logPrefix + "Language set to: " + cfgLang);
+		log.info(logPrefix + "BlockInfo " + biversion + " enabled.");		
+		
+		
 	}
  
 	public void onDisable(){
-		log.info(logPrefix + " Plugin in Version " + biversion + "  has been disabled.");
+		log.info(logPrefix + " Plugin in Version " + biversion + " disabled.");
 	}
 
 
@@ -114,17 +106,27 @@ public class BlockInfo extends JavaPlugin {
 * @param args
 */	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
+		Player player = (Player)sender;			
+		int id = 0;
+		
+		// BI
+		if (cmd.getName().equalsIgnoreCase("bi")) {
 
-			Player player = (Player)sender;			
-			int id = 0;			
-			
 			if(args.length == 0 ) { // just /bi
-				HashSet<Byte> paramHashSet = null;
-				int paramInt = 0;
-				Block targetBlock = player.getTargetBlock(paramHashSet, paramInt);
-				id = targetBlock.getTypeId();
-				player.sendMessage(logPrefix + id + " ("  + targetBlock.getData() + ") " + targetBlock.getType() + " , " + cfgLang + ": " + arrLang.get(id));	
-				return true;				
+				try {
+					HashSet<Byte> paramHashSet = null;
+					int paramInt = 0;
+					Block targetBlock = player.getTargetBlock(paramHashSet, paramInt);
+					id = targetBlock.getTypeId();
+					player.sendMessage(chatPrefix + id + ","  + targetBlock.getData() + " [" + targetBlock.getType() + "] " + cfgLang + ": " + arrLang.get(id));	
+					return true;									
+				} catch (Exception e) {
+					log.info(logPrefix + oops);
+					player.sendMessage(ChatColor.RED + oops);
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			} else if (args.length == 1 ) {
 				
 				try {
@@ -133,10 +135,10 @@ public class BlockInfo extends JavaPlugin {
 					id = -1;
 				}
 				if (id >= 0 && id < 97) { // /bi <0-96>
-					player.sendMessage(logPrefix + id + " = " + Material.getMaterial(id) + " / "  + arrLang.get(id));
+					player.sendMessage(chatPrefix + id + " [" + Material.getMaterial(id) + "] " + cfgLang + ": " + arrLang.get(id));
 					return true;
 				} else if (id < 0) { // /bi <searchstring>
-					searchBlock(args[0]);
+					searchBlock(arrLang, args[0], player);
 					return true;
 					} else { // ID > 96
 						return false;
@@ -144,39 +146,100 @@ public class BlockInfo extends JavaPlugin {
 			} else {
 				// mehr als 1 Argument
 				return false; 
+			}	
+		}
+		
+		//BILANG
+		if (cmd.getName().equalsIgnoreCase("bilang")) {
+			
+			if (args.length == 1 ) {
+				arrLang = loadLang(args[0], player);
+				if (arrLang.size() > 0) {
+					player.sendMessage(chatPrefix + "Selected Language is now: " + args[0] + " with "+ arrLang.size() + " Entries.");
+				}
+				return true;
+			} else if (args.length == 0 ) {
+				player.sendMessage(chatPrefix + "Selected Language: " + cfgLang);
+				
+				return true;
+			} else {
+				return false;
 			}
-	
+		}
+		
+		//BILIST
+		if (cmd.getName().equalsIgnoreCase("bilist")) {
+			player.sendMessage(chatPrefix + "List of Languages (Work in Progress)");
+			return true;
+		}
+		
+		return false;							
 	} 
 
 	
 	/**
-	* Find Block with 
+	* Find Block beginning with searchstring and printing result 
 	*
+	* @param mylang
 	* @param searchstring
+	* @param player
 	*/	
-	protected void searchBlock(String searchstring) {
-		ArrayList<String> arrResult = new ArrayList<String>();
-		//1. iterieren durch arrLang 
-
-		log.info(logPrefix + "Suche nach: " + searchstring);	    
-
+	protected void searchBlock(ArrayList<String> myLang, String searchstring, Player player) {
+		int found = 0;
+		player.sendMessage("");
 		for (int i = 0; i < arrLang.size() - 1; i++) {
-		      if (arrLang.get(i).startsWith(searchstring)) {
-		    	  log.info(i + ".ter Eintrag: " + arrLang.get(i));
-		          //System.out.println("MATCH: " + line);
+		      if (myLang.get(i).startsWith(searchstring)) {
+		    	  
+		    	  player.sendMessage(chatPrefix + i + " [" + Material.getMaterial(i) + "] "+ cfgLang + ": " + myLang.get(i));
+		    	  found = 1;
 		        }
+		}
+		if (found == 0) {
+			player.sendMessage(chatPrefix + "Nothing found, please try another string.");
 		}
 	}
 
+
+	/**
+	* Load Language
+	*
+	* @param lang of the Language
+	*/
+	protected ArrayList<String> loadLang(String lang, Player player) {
+		String line = "";
+		ArrayList<String> myLang = new ArrayList<String>();
+		fileLang = new File(mainDirectory + File.separator + lang + ".lst");
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(fileLang));
+			while (line != null) {
+				line = reader.readLine();
+				myLang.add(line);						
+			}
+		} catch (IOException e ) {
+			if (!player.equals(null)) {
+				player.sendMessage(ChatColor.RED + "CAN'T READ LANGUAGE: " + lang);
+			} 
+			
+			log.info(logPrefix + "IO-Error on loading Language: " + lang);
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+		}
+		
+		return myLang;
+		
+	}
 	
-/**
-* Create the Language-File from the .jar.
-*
-* @param name
-*/
-   protected void createLang(String name) {
+	
+	
+	
+	/**
+	* Create the Language-File from the .jar.
+	*
+	* @param name
+	*/
+	protected void createDefaultLangFile(String name) {
         File actual = new File(getDataFolder(), name);
-        log.info(logPrefix + "creating defaut Language: " + name);
+        log.info(logPrefix + "creating defaut Language-File: " + name);
             
             InputStream input = this.getClass().getResourceAsStream("/defaults/" + name);
             
