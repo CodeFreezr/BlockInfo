@@ -1,6 +1,6 @@
 name: BlockInfo
 main: org.dbt.mc.BlockInfo.BlockInfo
-version: 0.5
+version: 0.6
 author: CraftOz
 description: Simple multingual blockinfo for Minecraft on Bukkit
 commands:

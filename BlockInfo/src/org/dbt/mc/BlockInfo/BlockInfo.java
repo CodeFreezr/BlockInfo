@@ -27,7 +27,7 @@ import org.bukkit.util.config.Configuration;
 
 public class BlockInfo extends JavaPlugin {
 
-	public String biversion = "0.5";
+	public String biversion = "0.6";
 	
 	private final BlockInfoPlayerListener playerListener = new BlockInfoPlayerListener(this);
 	static String mainDirectory = "plugins/BlockInfo";
@@ -91,7 +91,7 @@ public class BlockInfo extends JavaPlugin {
 	}
  
 	public void onDisable(){
-		log.info(logPrefix + " Plugin in Version " + biversion + " disabled.");
+		log.info(logPrefix + "Blockinfo " + biversion + " disabled.");
 	}
 
 
@@ -169,8 +169,13 @@ public class BlockInfo extends JavaPlugin {
 		
 		//BILIST
 		if (cmd.getName().equalsIgnoreCase("bilist")) {
-			player.sendMessage(chatPrefix + "List of Languages (Work in Progress)");
+			try {
+				listLang(player);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			return true;
+			
 		}
 		
 		return false;							
@@ -229,7 +234,25 @@ public class BlockInfo extends JavaPlugin {
 		
 	}
 	
-	
+	protected void listLang(Player player) throws Exception {
+		  File dir = new File(mainDirectory);
+
+		    String[] children = dir.list();
+		    if (children == null) {
+		    	player.sendMessage(ChatColor.RED + "CAN'T FIND ANY LANGUAGE-FILES IN: " + mainDirectory);
+		    	log.info(logPrefix + "Is there really no Language-File in " + mainDirectory);
+		    } else {
+		    	int n = 0;
+		      for (int i = 0; i < children.length; i++) {
+		        String filename = children[i];
+		        if (filename.substring(3).equalsIgnoreCase("lst")) {
+		        	n++;
+			        player.sendMessage(chatPrefix + n + ". Found Language: " + filename.replace(".lst", ""));		        	
+		        }
+		      }
+		    }
+		  
+	}
 	
 	
 	/**
