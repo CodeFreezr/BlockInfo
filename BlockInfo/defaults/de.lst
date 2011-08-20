@@ -1,28 +1,28 @@
-Luft, Natuerlich
-Stein, Natuerlich
+﻿Luft, Natürlich
+Stein, Natürlich
 Gras, Pflanze
-Erde, Natuerlich
-Pflasterstein, Natuerlich
+Erde, Natürlich
+Pflasterstein, Natürlich
 Holz, Hergestellt
 Setzling, Pflanze
-Bedrock, Natuerlich
-Wasser, Fluessig
-Stehendes Wasser, Fluessig
-Lava, Fluessig
-Stehende Lava, Fluessig
-Sand, Natuerlich
-Kies, Natuerlich
+Bedrock, Natürlich
+Wasser, Flüssig
+Wasser (Stehend), Flüssig
+Lava, Flüssig
+Lava (Stehend), Flüssig
+Sand, Natürlich
+Kies, Natürlich
 Gold (Erz), Erze
 Eisen (Erz), Erze
 Kohle, Erze
 Baumstamm, Pflanze
-Blaetter, Pflanze
+Blätter, Pflanze
 Schwamm, Nicht verwendet
 Glas, Hergestellt
 Lapis Lazuli (Erz), Erze
 Lapis Lazuli (Block), Hergestellt
 Schleuderkiste, Mechanisch
-Sandstein, Natuerlich
+Sandstein, Natürlich
 Notenblock, Mechanisch
 Bett, Hilfsmittel
 Schiene (Booster), Mechanisch
@@ -35,7 +35,7 @@ Kolben, Mechanisch
 Kolben (Kopf), Mechanisch
 Wolle, Hergestellt
 Verschobener Block, Mechanisch
-Loewenzahn, Pflanze
+Löwenzahn, Pflanze
 Rose, Pflanze
 Brauner Pilz, Pflanze
 Fliegenpilz, Pflanze
@@ -45,12 +45,12 @@ Stufe (Doppelt), Hergestellt
 Stufe (Einzeln), Hergestellt
 Ziegelstein, Hergestellt
 TNT, Hilfsmittel
-Buecherregal, Hergestellt
-Mosiger Pflastersein, Natuerlich
-Obsidian, Natuerlich
-Fackel, Unbestaendig
-Feuer, Unbestaendig
-Mob-Spawner, Natuerlich
+Bücherregal, Hergestellt
+Mosiger Pflastersein, Natürlich
+Obsidian, Natürlich
+Fackel, Unbeständig
+Feuer, Unbeständig
+Mob-Spawner, Natürlich
 Treppe (Holz), Hergestellt
 Truhe, Hilfsmittel
 Redstone (Kabel), Mechanisch
@@ -60,38 +60,38 @@ Werkbank, Hilfsmittel
 Getreide, Pflanze
 Ackerboden, Hergestellt
 Ofen, Hilfsmittel
-Brennender Ofen, Hilfsmittel
-Schild, Unbestaendig
-Tuer (Holz), Mechanisch
+Ofen (brennend), Hilfsmittel
+Schild, Unbeständig
+Tür (Holz), Mechanisch
 Leiter, Hergestellt
 Schiene, Mechanisch
 Treppe (Stein), Hergestellt
-Wandschild, Unbestaendig
+Schild (Wand), Unbeständig
 Hebel, Mechanisch
 Druckplatte (Stein), Mechanisch
-Tuer (Eisen), Mechanisch
+Tür (Eisen), Mechanisch
 Druckplatte (Holz), Mechanisch
 Redstone (Erz), Erze
 Redstone (Erz, flimmernd), Erze
 Redstone Fackel (on), Mechanisch
 Redstone Fackel (off), Mechanisch
 Steinschalter, Mechanisch
-Schnee, Natuerlich
-Eis, Natuerlich
+Schnee, Natürlich
+Eis, Natürlich
 Schnee (Block), Hergestellt
 Kaktus, Pflanze
-Lehm, Natuerlich
+Lehm, Natürlich
 Zuckerrohr, Pflanze
 Jukebox, Hilfsmittel
 Zaun, Hergestellt
-Kuerbis, Pflanze
-Hoellenstein, Nether
+Kürbis, Pflanze
+Höllenstein, Nether
 Seelensand, Nether
 Glimmerstein, Nether
-Portal, Unbestaendig
+Portal, Unbeständig
 Jack-O-Lantern, Hergestellt
 Kuchen, Hilfsmittel
-Redstone-Verstaerker (off), Mechanisch
-Redstone-Verstaerker (on), Mechanisch
+Redstone-Verstärker (off), Mechanisch
+Redstone-Verstärker (on), Mechanisch
 Truhe (verschlossen), Nicht verwendet
-Falltuer, Mechanisch
+Falltür, Mechanisch

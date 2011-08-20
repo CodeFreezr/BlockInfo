@@ -1,4 +1,4 @@
-Air, Naturels
+﻿Air, Naturels
 Roche, Naturels
 Herbe, Plantes
 Terre, Naturels
@@ -28,13 +28,13 @@ Lit, Utilitaires
 Rails de propulsion, Mécanismes
 Rails de détection, Mécanismes
 Piston collant, Mécanismes
-Toile d'araignée, Non-utilises
+Toile d'araignée, Non-utilisés
 Herbes hautes, Plantes
 Arbuste mort, Plantes
 Piston, Mécanismes
 Icône , Mécanismes
 Piston, Fabriqué
-Laine blanche, Mecanismos
+Laine blanche, Mécanismes
 Pissenlit, Plantes
 Rose, Plantes
 Champignon brun, Plantes
@@ -44,7 +44,7 @@ Fer (bloc), Fabriqué
 Double dalle en pierre, Fabriqué
 Dalle en pierre, Fabriqué
 Brique (bloc), Fabriqué
-TNT, Utensilios
+TNT, Utilitaires
 Bibliothèque, Fabriqué
 Pierre moussue, Naturels
 Obsidienne, Naturels
@@ -52,15 +52,15 @@ Torche, Non-solides
 Feu, Non-solides
 Générateur de monstre, Naturels
 Escaliers en bois, Fabriqué
-Coffre, Utensilios
+Coffre, Utilitaires
 Redstone (câble), Mécanismes
 Diamant (minerai), Minerais
 Diamant (bloc), Fabriqué
-Établi, Utensilios
+Établi, Utilitaires
 Blé, Plantes
 Terre labourée, Fabriqué
-Four, Utensilios
-Four (actif), Utensilios
+Four, Utilitaires
+Four (actif), Utilitaires
 Panneau, Non-solides
 Porte en bois, Mécanismes
 Échelle, Fabriqué
@@ -82,15 +82,15 @@ Neige (bloc), Fabriqué
 Cactus, Plantes
 Argile (bloc), Naturels
 Canne à sucre, Plantes
-Jukebox, Utensilios
+Jukebox, Utilitaires
 Barrière, Fabriqué
 Citrouille, Plantes
-Netherrack, L'Ailleurs
-Soulsand, L'Ailleurs
-Glowstone, L'Ailleurs
+Netherrack, L'ailleurs
+Soulsand, L'ailleurs
+Glowstone, L'ailleurs
 Portail, Non-solides
 Citrouille-lanterne, Fabriqué
-Gâteau, Utensilios
+Gâteau, Utilitaires
 Redstone (répéteur), Mécanismes
 Redstone (répéteur, actif), Mécanismes
 Coffre (renfermé), Non-utilises

@@ -1,0 +1,24 @@
+Version 0.7
+	Search w/o CaseSensitive
+	UTF-8, now with "Umlaute"
+	Fight some Typos ;-)*
+
+Version 0.6
+    Finalize bilist
+    compiles against 1060
+
+Version 0.5
+    Add bilang and prepare bilist
+    Add en.lst English Language-Pack ;-)*
+
+Version 0.4
+    Add Search
+
+Version 0.3
+    First release on github
+
+Version 0.2
+    Added the ability for the plugin to create everything from the jar
+
+Version 0.1
+    First Draft

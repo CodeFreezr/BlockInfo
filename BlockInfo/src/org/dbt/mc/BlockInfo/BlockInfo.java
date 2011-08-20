@@ -3,10 +3,11 @@ package org.dbt.mc.BlockInfo;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Properties;
@@ -27,7 +28,7 @@ import org.bukkit.util.config.Configuration;
 
 public class BlockInfo extends JavaPlugin {
 
-	public String biversion = "0.6";
+	public String biversion = "0.7";
 	
 	private final BlockInfoPlayerListener playerListener = new BlockInfoPlayerListener(this);
 	static String mainDirectory = "plugins/BlockInfo";
@@ -156,6 +157,8 @@ public class BlockInfo extends JavaPlugin {
 				arrLang = loadLang(args[0], player);
 				if (arrLang.size() > 0) {
 					player.sendMessage(chatPrefix + "Selected Language is now: " + args[0] + " with "+ arrLang.size() + " Entries.");
+				    config.setProperty("Lang", args[0]); 
+				    config.save();
 				}
 				return true;
 			} else if (args.length == 0 ) {
@@ -193,7 +196,8 @@ public class BlockInfo extends JavaPlugin {
 		int found = 0;
 		player.sendMessage("");
 		for (int i = 0; i < arrLang.size() - 1; i++) {
-		      if (myLang.get(i).startsWith(searchstring)) {
+			
+		      if (myLang.get(i).toLowerCase().startsWith(searchstring.toLowerCase())) {
 		    	  
 		    	  player.sendMessage(chatPrefix + i + " [" + Material.getMaterial(i) + "] "+ cfgLang + ": " + myLang.get(i));
 		    	  found = 1;
@@ -215,7 +219,7 @@ public class BlockInfo extends JavaPlugin {
 		ArrayList<String> myLang = new ArrayList<String>();
 		fileLang = new File(mainDirectory + File.separator + lang + ".lst");
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(fileLang));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileLang), "UTF8"));
 			while (line != null) {
 				line = reader.readLine();
 				myLang.add(line);						
