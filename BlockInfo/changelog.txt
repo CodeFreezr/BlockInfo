@@ -1,3 +1,12 @@
+Version 0.8
+	Correct the Langauge Save bug
+	XYZ-Coordinates in /bi and /bim
+	simple configurable Chat-Color in config.yml
+	
+Version 0.7.5
+	bim for m!ore blockinfo
+	biversion gives the BlockInfo-Version
+	
 Version 0.7
 	Search w/o CaseSensitive
 	UTF-8, now with "Umlaute"

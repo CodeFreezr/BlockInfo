@@ -1,12 +1,15 @@
 name: BlockInfo
 main: org.dbt.mc.BlockInfo.BlockInfo
-version: 0.7
+version: 0.8
 author: CraftOz
-description: Simple multingual blockinfo for Minecraft on Bukkit
+description: Simple multilingual blockinfo for Minecraft on Bukkit
 commands:
   bi:
     description: Display Information of BLocks in a selected Language.
     usage: /bi => getting infos of selected block or - /bi <0-96> => getting infos from an id or - /bi <string> => Finds Blocks starting with string.
+
+  bim:
+    description: Like /bi but gives more Informations only on actual selected block.
 
   bilang:
     description: Change the Language.
@@ -15,3 +18,7 @@ commands:
   bilist:
    description: List all available Languages.
    usage: /bilist => List all available Languages.
+   
+  biversion:
+   description: Gives the actual BlockInfo-Version
+ 

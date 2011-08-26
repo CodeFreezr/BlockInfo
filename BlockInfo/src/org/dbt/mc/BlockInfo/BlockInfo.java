@@ -28,7 +28,7 @@ import org.bukkit.util.config.Configuration;
 
 public class BlockInfo extends JavaPlugin {
 
-	public String biversion = "0.7";
+	public String biversion = "0.8";
 	
 	private final BlockInfoPlayerListener playerListener = new BlockInfoPlayerListener(this);
 	static String mainDirectory = "plugins/BlockInfo";
@@ -53,11 +53,12 @@ public class BlockInfo extends JavaPlugin {
 
 	//Add variables that the user can define. We'll add one each of common types:
 	public String cfgLang;
+	public Integer cfgColor;
 
 	//Logger & Output-Settings
 	Logger log = Logger.getLogger("Minecraft");
 	public static String logPrefix = "[BI] ";
-	public static String chatPrefix = ChatColor.BLUE + logPrefix;
+	public static String chatPrefix = ChatColor.YELLOW + logPrefix;
 	public static String oops = "Oops, here went something wrong. Please reload. If this doesn't work, please post a hint in the Bukkit-Plugin-Forum. thx-a-lot";
 	
 	public void onEnable() {
@@ -74,8 +75,9 @@ public class BlockInfo extends JavaPlugin {
 		
 	    config = getConfiguration(); 
 	    cfgLang = config.getString("Lang", "de"); 
+	    cfgColor = config.getInt("Color",3);
 	    config.save();
-	
+	    chatPrefix = ChatColor.getByCode(cfgColor) + logPrefix;
 		
 		
 		
@@ -111,15 +113,41 @@ public class BlockInfo extends JavaPlugin {
 		int id = 0;
 		
 		// BI
-		if (cmd.getName().equalsIgnoreCase("bi")) {
+		if (cmd.getName().equalsIgnoreCase("bi") || cmd.getName().equalsIgnoreCase("bim")) {
 
 			if(args.length == 0 ) { // just /bi
 				try {
+					if (cmd.getName().equalsIgnoreCase("bim")) {
+						
+					}
 					HashSet<Byte> paramHashSet = null;
 					int paramInt = 0;
 					Block targetBlock = player.getTargetBlock(paramHashSet, paramInt);
 					id = targetBlock.getTypeId();
-					player.sendMessage(chatPrefix + id + ","  + targetBlock.getData() + " [" + targetBlock.getType() + "] " + cfgLang + ": " + arrLang.get(id));	
+					if (cmd.getName().equalsIgnoreCase("bim")) {
+						player.sendMessage("");
+						player.sendMessage(chatPrefix + "=================================================");
+					}
+//					player.sendMessage(chatPrefix + id + ","  + targetBlock.getData() + " [" + targetBlock.getType() + "] " + cfgLang + ": " + arrLang.get(id));	
+					
+					
+					player.sendMessage(chatPrefix + id + ","  + targetBlock.getData() + 
+							" ["+ targetBlock.getX() +  "|" + targetBlock.getY()+  "|" + targetBlock.getZ() + "] [" + 
+							targetBlock.getType() + "] " + " - " + arrLang.get(id));
+					
+					
+					
+					if (cmd.getName().equalsIgnoreCase("bim")) {
+						player.sendMessage(chatPrefix + "=================================================");
+//						player.sendMessage(chatPrefix + "0123456789012345678901234567890123456789012345678");
+						player.sendMessage(chatPrefix + "Temp.: " + targetBlock.getTemperature());
+						player.sendMessage(chatPrefix + "Humi.: " + targetBlock.getHumidity());
+//						player.sendMessage(chatPrefix + "Coord.:  X: " + targetBlock.getX() + ", Y: " + targetBlock.getY() +  ", Z: " + targetBlock.getZ());
+						player.sendMessage(chatPrefix + "Light: " + targetBlock.getLightLevel() + ", BlockPower: " + targetBlock.getBlockPower() + ", Liquid: " + targetBlock.isLiquid());
+						player.sendMessage(chatPrefix + "Biome: " + targetBlock.getBiome() + ", World: " + targetBlock.getWorld().getName() + ", Time: " + targetBlock.getWorld().getFullTime());
+//						player.sendMessage(chatPrefix + "Status:        " + targetBlock.getState());
+//						player.sendMessage(chatPrefix + "Liquid____: " + targetBlock.isLiquid());
+					}
 					return true;									
 				} catch (Exception e) {
 					log.info(logPrefix + oops);
@@ -148,6 +176,11 @@ public class BlockInfo extends JavaPlugin {
 				// mehr als 1 Argument
 				return false; 
 			}	
+		}
+		
+		//BIVERSION
+		if (cmd.getName().equalsIgnoreCase("biversion")) {
+			player.sendMessage(chatPrefix + "BlockInfo-Version: " + biversion);
 		}
 		
 		//BILANG
